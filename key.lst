@@ -1,0 +1,112 @@
+C51 COMPILER V7.08   KEY                                                                   12/10/2016 07:51:02 PAGE 1   
+
+
+C51 COMPILER V7.08, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN C:\v16he1s3\key.obj
+COMPILER INVOKED BY: C:\Keil2\C51\BIN\C51.EXE ..\..\Keypad\key.c BROWSE DEBUG OBJECTEXTEND PRINT(.\key.lst) OBJECT(C:\v1
+                    -6he1s3\key.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include "seg.h"
+   3          
+   4          sbit c0 = P1^0;
+   5          sbit c1 = P1^1;
+   6          sbit c2 = P1^2;
+   7          sbit c3 = P1^3;
+   8          sbit r0 = P1^4;
+   9          sbit r1 = P1^5;
+  10          sbit r2 = P1^6;
+  11          sbit r3 = P1^7;
+  12          
+  13          int a[][4] = {0,1,2,3,
+  14                                    4,5,6,7,
+  15                                    8,9,10,11,
+  16                                    12,13,14,15};
+  17          
+  18          char row,col;
+  19          
+  20          void Init_keypad(void)
+  21          {
+  22   1              r0=r1=r2=r3=0;
+  23   1              c0=c1=c2=c3=1;
+  24   1      }
+  25          int Iskeypressed(void)
+  26          {
+  27   1              return(!(c0&&c1&&c2&&c3));
+  28   1      
+  29   1      }
+  30          int keyscan(void)
+  31          {
+  32   1      
+  33   1              r0=0;
+  34   1              r1=r2=r3=1;
+  35   1              if(Iskeypressed())
+  36   1              {
+  37   2                      row = 0;
+  38   2                      goto colcheck;
+  39   2              }
+  40   1      
+  41   1              r1=0;
+  42   1              r0=r2=r3=1;
+  43   1              if(Iskeypressed())
+  44   1              {
+  45   2                      row = 1;
+  46   2                      goto colcheck;
+  47   2              }
+  48   1      
+  49   1              r2=0;
+  50   1              r1=r0=r3=1;
+  51   1              if(Iskeypressed())
+  52   1              {
+  53   2                      row = 2;
+  54   2                      goto colcheck;
+C51 COMPILER V7.08   KEY                                                                   12/10/2016 07:51:02 PAGE 2   
+
+  55   2              }
+  56   1      
+  57   1              r3=0;
+  58   1              r1=r2=r0=1;
+  59   1              if(Iskeypressed())
+  60   1              {
+  61   2                      row = 3;
+  62   2                      goto colcheck;
+  63   2              }
+  64   1      
+  65   1      colcheck:  if(c0==0)
+  66   1                              {
+  67   2                                      col=0;
+  68   2                              }
+  69   1                              if(c1==0)
+  70   1                              {
+  71   2                                      col=1;
+  72   2                              }
+  73   1                              if(c2==0)
+  74   1                              {
+  75   2                                      col=2;
+  76   2                              }
+  77   1                              if(c3==0)
+  78   1                              {
+  79   2                                      col=3;
+  80   2                              }
+  81   1              while(Iskeypressed());//avoiding debouncing effect
+  82   1              r0=r1=r2=r3=0;
+  83   1              return(a[row][col]);
+  84   1      
+  85   1      }
+  86          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    176    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     34    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

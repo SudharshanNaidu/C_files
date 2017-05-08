@@ -1,0 +1,53 @@
+C51 COMPILER V7.08   KEYLCDMAIN                                                            12/10/2016 07:51:04 PAGE 1   
+
+
+C51 COMPILER V7.08, COMPILATION OF MODULE KEYLCDMAIN
+OBJECT MODULE PLACED IN C:\v16he1s3\keylcdmain.obj
+COMPILER INVOKED BY: C:\Keil2\C51\BIN\C51.EXE ..\..\Keypad\keylcdmain.c BROWSE DEBUG OBJECTEXTEND PRINT(.\keylcdmain.lst
+                    -) OBJECT(C:\v16he1s3\keylcdmain.obj)
+
+line level    source
+
+   1          #include "delay.h"
+   2          #include "lcd.h"
+   3          #include "key.h"
+   4          
+   5          
+   6          main()
+   7          {
+   8   1              int i;
+   9   1              LCD_Init();
+  10   1              Init_keypad();
+  11   1              LCD_cmd(0x80);
+  12   1              LCD_str("WELCoME");     
+  13   1              LCD_str(0x10);
+  14   1              delay_ms(1000);
+  15   1              LCD_char(' ');
+  16   1              delay_ms(1000);
+  17   1      
+  18   1              LCD_str(0x10);
+  19   1              delay_ms(1000);
+  20   1              delay_ms(2000);
+  21   1              while(1)
+  22   1              {       
+  23   2                      while(!Iskeypressed());
+  24   2                      i = keyscan();          
+  25   2                      LCD_int(i);
+  26   2              }
+  27   1      
+  28   1      
+  29   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     90    ----
+   CONSTANT SIZE    =      8    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
