@@ -1,7 +1,7 @@
 #include"lcd.h"
 #include"delay.h"
 #include<reg51.h>
-
+//hjdsdfnc.dkfcnZZZZZ
 
 #define lcd P0
 
